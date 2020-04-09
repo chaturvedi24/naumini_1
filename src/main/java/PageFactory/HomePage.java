@@ -7,11 +7,9 @@ import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
-    WebDriver homepageDriver;
 
     public HomePage (WebDriver driver) {
-        homepageDriver = driver;
-        PageFactory.initElements(homepageDriver, this);
+        PageFactory.initElements(driver, this);
     }
 
     @FindBy(how = How.XPATH, using = "//img[@alt=\"Let's Kode It\"]")
@@ -34,6 +32,10 @@ public class HomePage {
 
     public void isEnrollNowDisplayed() {
         enrollNow.isDisplayed();
+    }
+
+    public void clickSignup(){
+        enrollNow.click();
     }
 
 }

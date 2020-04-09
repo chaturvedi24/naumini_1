@@ -10,11 +10,8 @@ import org.openqa.selenium.support.ui.Select;
 public class PracticePage {
 
     public PracticePage(WebDriver driver) {
-        this.practiceDriver = driver;
-        PageFactory.initElements(practiceDriver, this);
+        PageFactory.initElements(driver, this);
     }
-
-    private WebDriver practiceDriver;
 
     @FindBy(how = How.ID, using = "bmwradio")
     public static WebElement bmwRadio;
