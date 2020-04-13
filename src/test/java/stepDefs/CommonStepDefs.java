@@ -8,6 +8,8 @@ import managers.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.List;
+
 
 public class CommonStepDefs {
 
@@ -17,52 +19,10 @@ public class CommonStepDefs {
         this.context = context;
     }
 
-    @Given("^I wait for (\\w+) milliseconds$")
-    public void i_wait(long waitTime) throws InterruptedException {
-        Thread.sleep(waitTime);
-    }
-
-    @Given("^I navigate to \"([^\"]*)\" url$")
-    public void i_navigate_to_url(String string) {
-        Driver.getDriver().get(string);
-        System.out.println("Window Title:" + Driver.getDriver().getTitle());
-    }
-
     @Given("^I click on (\\w+)$")
     public void i_click_on_button(String elementNm) {
-        Object currentPage = context.getPageObjectMgr().getCurrentPage();
-        WebElement clickElement = WebElementMgr.getWebElement(currentPage, elementNm);
+        WebElement clickElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
         clickElement.click();
-    }
-
-    @Then("^I am on the (\\w+) page$")
-    public void i_am_on_page(String pageNm) throws Exception {
-        context.getPageObjectMgr().setCurrentPage(pageNm);
-    }
-
-    @Then("^I validate (\\w+) is displayed$")
-    public void i_validate_displayed(String elementNm) {
-        Object currentPage = context.getPageObjectMgr().getCurrentPage();
-        WebElement displayElement = WebElementMgr.getWebElement(currentPage, elementNm);
-        if (!displayElement.isDisplayed()) {
-            System.out.println(elementNm + " not displayed");
-        } else System.out.println(elementNm + " displayed");
-    }
-
-    /**
-     * Step to validate element's attribute value with expected
-     * @param elementNm
-     * @param attributeNm
-     * @param expectedValue
-     */
-    @Then("^I validate (\\w+) (\\w+) is \"([^\"]*)\"$")
-    public void i_validate_attribute(String elementNm, String attributeNm, String expectedValue) {
-        Object currentPage = context.getPageObjectMgr().getCurrentPage();
-        WebElement attrElement = WebElementMgr.getWebElement(currentPage, elementNm);
-        String actualValue = attrElement.getAttribute(attributeNm);
-        if (!actualValue.equals(expectedValue)) {
-            System.out.println(expectedValue + " not found on page. Found " + actualValue);
-        }
     }
 
     /**
@@ -73,8 +33,7 @@ public class CommonStepDefs {
      */
     @Then("^I select (\\w+) from (\\w+) (dropdown|multiselect)$")
     public void i_select(String selectionVal, String elementNm, String type) {
-        Object currentPage = context.getPageObjectMgr().getCurrentPage();
-        WebElement selectElement = WebElementMgr.getWebElement(currentPage, elementNm);
+        WebElement selectElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
         Select sel = new Select(selectElement);
         sel.selectByValue(selectionVal);
     }
@@ -84,15 +43,11 @@ public class CommonStepDefs {
      * @param value
      * @param elementNm
      */
-    @Then("^I enter \"([^\"]*)\" in (\\w+)")
+    @Then("^I enter \"([^\"]*)\" in (\\w+)$")
     public void i_enter_given_value(String value, String elementNm) {
-        Object currentPage = context.getPageObjectMgr().getCurrentPage();
-        WebElement editElement = WebElementMgr.getWebElement(currentPage, elementNm);
+        WebElement editElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
         editElement.clear();
         editElement.sendKeys(value);
     }
-
-
-
 
 }

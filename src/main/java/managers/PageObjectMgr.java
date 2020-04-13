@@ -17,5 +17,4 @@ public class PageObjectMgr {
             throw new Exception("Class not found to initialize "+pageNm);
         }
     }
-
 }
