@@ -10,9 +10,9 @@ public class PageObjectMgr {
         return currentPage;
     }
 
-    public void setCurrentPage(String pageNm) throws Exception{
+    public void setCurrentPage(String pageNm, String pkg) throws Exception{
         try {
-            currentPage = PageFactory.initElements(Driver.getDriver(), Class.forName("PageFactory."+pageNm));
+            currentPage = PageFactory.initElements(Driver.getDriver(), Class.forName(pkg+"."+pageNm));
         } catch (ClassNotFoundException e) {
             throw new Exception("Class not found to initialize "+pageNm);
         }

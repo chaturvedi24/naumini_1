@@ -15,4 +15,7 @@ public class HomePage {
     @FindBy(how = How.XPATH, using = "//a[@href='/sign_up']")
     public static WebElement enrollNow;
 
+    @FindBy(how = How.XPATH, using = "//div[contains(@class, 'course-block')]/div[@class='container']/h2")
+    public static WebElement courseHeader;
+
 }

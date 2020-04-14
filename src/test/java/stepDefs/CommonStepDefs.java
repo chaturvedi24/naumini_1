@@ -4,12 +4,8 @@ import Utilities.AutomationContext;
 import Utilities.WebElementMgr;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import managers.Driver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
-
-import java.util.List;
-
 
 public class CommonStepDefs {
 
@@ -48,6 +44,22 @@ public class CommonStepDefs {
         WebElement editElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
         editElement.clear();
         editElement.sendKeys(value);
+    }
+
+    /**
+     * Step stores a given element's attribute/text in a cache key
+     * Ex: I store courseHeader text in "coursekey"
+     * @param elementNm
+     * @param attr
+     * @param key
+     */
+    @Then("^I store (\\w+) (\\w+) in \"(.*)\"$")
+    public void i_enter_given_value(String elementNm, String attr, String key) {
+        WebElement storeElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
+        if(attr.equalsIgnoreCase("text")) {
+            context.setContextCache(key,storeElement.getText());
+        } else context.setContextCache(key,storeElement.getAttribute(attr));
+        context.getScenarioManager().getScenario().write("Stored "+elementNm+" "+attr+ " in "+key+" :"+context.getContextCache(key));
     }
 
 }

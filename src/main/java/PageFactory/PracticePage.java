@@ -32,4 +32,7 @@ public class PracticePage {
     @FindBy(how = How.XPATH, using = "//iframe[@src='https://learn.letskodeit.com/courses']")
     public static WebElement iframeExample;
 
+    @FindBy(how = How.XPATH, using = "//button[text()='Open Window']")
+    public static WebElement openWindow;
+
 }

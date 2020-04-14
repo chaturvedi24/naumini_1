@@ -15,6 +15,7 @@ public class Hooks {
 
     @Before
     public void setup(Scenario scenario) {
+        Driver.setBrowserNmVersion(context.getConfigFileReader().getPropertyValue("browser"), context.getConfigFileReader().getPropertyValue("browserVersion"));
         Driver.initializeDriver();
         context.getScenarioManager().setScenario(scenario);
         Driver.getDriver().manage().window().maximize();

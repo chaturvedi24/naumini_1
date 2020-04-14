@@ -8,7 +8,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class Driver {
     private static WebDriver driver;
-
+    private static String browser;
+    private static String browserVersion;
     public static WebDriver getDriver() {
         if (driver == null) {
             initializeDriver();
@@ -16,10 +17,15 @@ public class Driver {
         return driver;
     }
 
+    public static void setBrowserNmVersion(String browserNm, String browserVer) {
+        browser = browserNm;
+        browserVersion = browserVer;
+    }
+
     public static void initializeDriver() {
-        String browserName = System.getProperty("browser");
-        String browserVersion = System.getProperty("browserVersion");
-        switch (browserName) {
+        browser = System.getProperty("browser") !=null ? System.getProperty("browser"): browser != null? browser : "chrome";
+       browserVersion = System.getProperty("browserVersion") !=null ? System.getProperty("browserVersion"): browserVersion != null? browser : "";
+        switch (browser) {
             case "chrome":
                 if (!browserVersion.equals("")) {
                     WebDriverManager.chromedriver().version(browserVersion).setup();
