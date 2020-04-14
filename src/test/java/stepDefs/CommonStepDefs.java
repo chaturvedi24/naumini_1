@@ -16,9 +16,15 @@ public class CommonStepDefs {
     }
 
     @Given("^I click on (\\w+)$")
-    public void i_click_on_button(String elementNm) {
+    public void i_click_on_button(String elementNm) throws Exception {
         WebElement clickElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
-        clickElement.click();
+        try {
+            clickElement.click();
+            context.getScenarioManager().getScenario().write("Clicked on " + elementNm);
+        } catch (Exception e) {
+            context.getScenarioManager().getScenario().write("Unable to click on " + elementNm + "; Error encountered:" + e.getMessage());
+            throw new Exception("Unable to click on " + elementNm + "; Error encountered:" + e.getMessage());
+        }
     }
 
     /**
@@ -30,8 +36,13 @@ public class CommonStepDefs {
     @Then("^I select (\\w+) from (\\w+) (dropdown|multiselect)$")
     public void i_select(String selectionVal, String elementNm, String type) {
         WebElement selectElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
-        Select sel = new Select(selectElement);
-        sel.selectByValue(selectionVal);
+        try {
+            Select sel = new Select(selectElement);
+            sel.selectByValue(selectionVal);
+            context.getScenarioManager().getScenario().write("Selected " + selectionVal + " from " + elementNm + " " + type);
+        } catch (Exception e) {
+            context.getScenarioManager().getScenario().write("Unable to Select " + selectionVal + " from " + elementNm + " " + type + "; Error encountered:" + e.getMessage());
+        }
     }
 
     /**
@@ -42,8 +53,13 @@ public class CommonStepDefs {
     @Then("^I enter \"([^\"]*)\" in (\\w+)$")
     public void i_enter_given_value(String value, String elementNm) {
         WebElement editElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
-        editElement.clear();
-        editElement.sendKeys(value);
+        try {
+            editElement.clear();
+            editElement.sendKeys(value);
+            context.getScenarioManager().getScenario().write("Entered value " + value + " in " + elementNm);
+        } catch (Exception e) {
+            context.getScenarioManager().getScenario().write("Unable to enter value " + value + " in " + elementNm + "; Error encountered:" + e.getMessage());
+        }
     }
 
     /**
