@@ -1,6 +1,7 @@
 package stepDefs;
 
 import Utilities.AutomationContext;
+import Utilities.ExcelHelper;
 import Utilities.WebElementMgr;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -54,6 +55,7 @@ public class CommonStepDefs {
     public void i_enter_given_value(String value, String elementNm) {
         WebElement editElement = (WebElement) WebElementMgr.getWebElement(context.getPageObjectMgr().getCurrentPage(), elementNm);
         try {
+            value = context.getContextCache(value);
             editElement.clear();
             editElement.sendKeys(value);
             context.getScenarioManager().getScenario().write("Entered value " + value + " in " + elementNm);
@@ -76,6 +78,12 @@ public class CommonStepDefs {
             context.setContextCache(key,storeElement.getText());
         } else context.setContextCache(key,storeElement.getAttribute(attr));
         context.getScenarioManager().getScenario().write("Stored "+elementNm+" "+attr+ " in "+key+" :"+context.getContextCache(key));
+    }
+
+    @Then("^I read excel file \"(.*)\" and store$")
+    public void i_read_excel(String fileNm) {
+        context.setHashMapDataCache(fileNm, ExcelHelper.readExcelInput(fileNm));
+        context.getScenarioManager().getScenario().write("excel data:"+context.getHashMapDataCache(fileNm));
     }
 
 }

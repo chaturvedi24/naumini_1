@@ -5,7 +5,7 @@ Feature: validate using common step definitions
     Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     Then I validate enrollNow is displayed
-    Then I wait for 5000 milliseconds
+    Then I wait for homeImg to be visible
     Then I validate homeImg src is "https://process.fs.teachablecdn.com"
 
   @regression @commonpracticepage
@@ -14,12 +14,30 @@ Feature: validate using common step definitions
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I am on the PracticePage page
-    Then I wait for 5000 milliseconds
+    Then I wait for bmwRadio to be clickable
     Then I click on bmwRadio
     Then I select honda from dropDn dropdown
     Then I select apple from multiSel multiselect
     Then I select peach from multiSel multiselect
     Then I wait for 10000 milliseconds
+
+  @regression @hoverExample
+  Scenario: for practice page
+    Given I navigate to "kodeit.url" url
+    Given I am on the HomePage page
+    When I click on practiceBtn
+    Then I am on the PracticePage page
+    Then I wait for mouseHover to be visible
+    Then I hover on mouseHover and then validate text for hover1 to match with "Top"
+    Then I wait for 5000 milliseconds
+
+  @regression @waitexample
+  Scenario: for practice page wait
+    Given I navigate to "kodeit.url" url
+    Given I am on the HomePage page
+    When I click on practiceBtn
+    Then I am on the PracticePage page
+    Then I wait for userName to be visible
 
   @regression @switchtochildexample
   Scenario: for practice page switch to child window
@@ -27,7 +45,7 @@ Feature: validate using common step definitions
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I am on the PracticePage page
-    Then I wait for 5000 milliseconds
+    Then I wait for openWindow to be clickable
     Then I click on openWindow
     Then I wait for 5000 milliseconds
     And I switch to child window
@@ -40,14 +58,14 @@ Feature: validate using common step definitions
     Given I am on the HomePage page
     Then I click on enrollNow
     Then I am on the SignUpPage page
-    Then I wait for 5000 milliseconds
+    Then I wait for userEmail to be visible
     Given I enter "some@email.com" in userEmail
     Given I enter "testing user" in userName
     Given I enter "testPwd" in userPwd
     Given I enter "testPwd" in confirmPwd
     Then I click on agreeMarketing
     Then I click on agreeTerms
-    Then I wait for 5000 milliseconds
+    Then I wait for signUp to be visible
     Then I validate signUp is enabled
 
   @regression @coursesearchpage
@@ -82,9 +100,32 @@ Feature: validate using common step definitions
     Then I store courseHeader text in "coursekey"
     When I click on practiceBtn
     Then I am on the PracticePage page
-    Then I wait for 5000 milliseconds
+    Then I wait for iframeExample to be visible
     Then I switch to iframeExample iframe
     Then I am on the CourseSearchPage page
     Then I click on courseHomeImg
-    Then I wait for 5000 milliseconds
+    Then I wait for courseHeader to be visible
     Then I validate courseHeader text with "coursekey"
+
+  @regression @getcontextvalue
+  Scenario: Validate sign up page
+    Given I navigate to "kodeit.url" url
+    Given I am on the HomePage page
+    Then I click on enrollNow
+    Then I am on the SignUpPage page
+    Then I wait for userName to be visible
+    Given I enter "userName" in userName
+    Then I wait for userName to be visible
+    Given I enter "testuser" in userName
+    Then I wait for userName to be visible
+    Given I enter "actual user" in userName
+    Then I wait for 10000 milliseconds
+
+  @exceldata
+  Scenario: validate with excel
+    Given I navigate to "kodeit.url" url
+    Given I am on the HomePage page
+    Then I click on enrollNow
+    Then I am on the SignUpPage page
+    Given I read excel file "InputData" and store
+    Then I validate signup page fields using "InputData"

@@ -35,4 +35,13 @@ public class PracticePage {
     @FindBy(how = How.XPATH, using = "//button[text()='Open Window']")
     public static WebElement openWindow;
 
+    @FindBy(how = How.XPATH, using = "//button[@id='mousehover']")
+    public static WebElement mouseHover;
+
+    @FindBy(how = How.XPATH, using = "//div[@class='mouse-hover-content']/a[1]")
+    public static WebElement hover1;
+
+    @FindBy(how = How.ID, using = "user_name")
+    public static WebElement userName;
+
 }
