@@ -41,7 +41,6 @@ public class CustomStepDefs {
                 pass = false;
                 context.getScenarioManager().getScenario().write("Fail; "+eachMap.get("TC")+": signup button is not:"+eachMap.get("SignUpEnabled"));
             }
-
         }
         if(!pass) throw new Exception ("Validation failed. Check outputs!");
 
