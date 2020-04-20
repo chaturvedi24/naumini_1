@@ -10,12 +10,16 @@ public class HomePage {
     public static WebElement homeImg;
 
     @FindBy(how = How.XPATH, using = "//a[@href='/pages/practice']")
-    public WebElement practiceBtn;
+    public static WebElement practiceBtn;
 
     @FindBy(how = How.XPATH, using = "//a[@href='/sign_up']")
     public static WebElement enrollNow;
 
     @FindBy(how = How.XPATH, using = "//div[contains(@class, 'course-block')]/div[@class='container']/h2")
     public static WebElement courseHeader;
+
+    public static void clickPractice() {
+        practiceBtn.click();
+    }
 
 }

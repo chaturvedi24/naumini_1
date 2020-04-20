@@ -120,12 +120,4 @@ Feature: validate using common step definitions
     Then I wait for userName to be visible
     Given I enter "actual user" in userName
     Then I wait for 10000 milliseconds
-
-  @exceldata
-  Scenario: validate with excel
-    Given I navigate to "kodeit.url" url
-    Given I am on the HomePage page
-    Then I click on enrollNow
-    Then I am on the SignUpPage page
-    Given I read excel file "InputData" and store
-    Then I validate signup page fields using "InputData"
+    
