@@ -2,7 +2,6 @@ Feature: validate using common step definitions
 
   @regression @commonhomepage
   Scenario: for home page
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     Then I validate enrollNow is displayed
     Then I wait for homeImg to be visible
@@ -10,7 +9,6 @@ Feature: validate using common step definitions
 
   @regression @commonpracticepage
   Scenario: for practice page
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I am on the PracticePage page
@@ -21,9 +19,8 @@ Feature: validate using common step definitions
     Then I select peach from multiSel multiselect
     Then I wait for 10000 milliseconds
 
-  @regression @hoverExample
-  Scenario: for practice page
-    Given I navigate to "kodeit.url" url
+  @regression @hoverExample @single
+  Scenario: for practice page hover
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I am on the PracticePage page
@@ -33,7 +30,6 @@ Feature: validate using common step definitions
 
   @regression @waitexample
   Scenario: for practice page wait
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I am on the PracticePage page
@@ -41,7 +37,6 @@ Feature: validate using common step definitions
 
   @regression @switchtochildexample
   Scenario: for practice page switch to child window
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I am on the PracticePage page
@@ -54,7 +49,6 @@ Feature: validate using common step definitions
 
   @regression @commonsignuppage
   Scenario: Validate sign up page
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     Then I click on enrollNow
     Then I am on the SignUpPage page
@@ -70,7 +64,6 @@ Feature: validate using common step definitions
 
   @regression @coursesearchpage
   Scenario: Validate course search page iframe sample
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     When I click on practiceBtn
     Then I wait for 5000 milliseconds
@@ -95,7 +88,6 @@ Feature: validate using common step definitions
 
   @regression @contextexample
   Scenario: for course search page cache
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     Then I store courseHeader text in "coursekey"
     When I click on practiceBtn
@@ -108,8 +100,7 @@ Feature: validate using common step definitions
     Then I validate courseHeader text with "coursekey"
 
   @regression @getcontextvalue
-  Scenario: Validate sign up page
-    Given I navigate to "kodeit.url" url
+  Scenario: Validate sign up page get from context
     Given I am on the HomePage page
     Then I click on enrollNow
     Then I am on the SignUpPage page
@@ -120,4 +111,3 @@ Feature: validate using common step definitions
     Then I wait for userName to be visible
     Given I enter "actual user" in userName
     Then I wait for 10000 milliseconds
-    

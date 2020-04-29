@@ -2,7 +2,6 @@ Feature: Customized test steps
 
   @regression @exceldata
   Scenario: validate with excel
-    Given I navigate to "kodeit.url" url
     Given I am on the HomePage page
     Then I click on enrollNow
     Then I am on the SignUpPage page
@@ -11,8 +10,7 @@ Feature: Customized test steps
 
     #below scenario added as example on how to add customized element actions to page object classes itself
   @regression @custompracticeclick
-  Scenario: for home page
-    Given I navigate to "kodeit.url" url
+  Scenario: for home page custom click
     Given I am on the HomePage page
     Then I wait for practiceBtn to be clickable
     Then I click practice btn from "Home Page"

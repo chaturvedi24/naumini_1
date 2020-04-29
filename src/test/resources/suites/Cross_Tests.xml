@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Cross Browser Testing" verbose="1" configfailurepolicy="continue" thread-count="5">
+    <listeners>
+        <listener class-name="Utilities.DriverListener"/>
+    </listeners>
+    <test name="Windows Chrome Browser">
+        <parameter name="browserName" value="chrome"/>
+        <parameter name="browserVersion" value="ANY"/>
+        <parameter name="platform" value="windows"/>
+        <parameter name="testapp" value="web"/>
+        <classes>
+            <class name="testRunners.RunCukes"/>
+            <class name="testRunners.ReRunCukes"/>
+        </classes>
+    </test>
+    <test name="Windows firefox Browser">
+        <parameter name="browserName" value="firefox"/>
+        <parameter name="browserVersion" value="ANY"/>
+        <parameter name="platform" value="windows"/>
+        <parameter name="testapp" value="web"/>
+        <classes>
+            <class name="testRunners.RunCukes"/>
+            <class name="testRunners.ReRunCukes"/>
+        </classes>
+    </test>
+</suite>

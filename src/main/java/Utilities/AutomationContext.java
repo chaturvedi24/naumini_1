@@ -4,17 +4,30 @@ import io.restassured.response.Response;
 import managers.PageObjectMgr;
 import org.apache.commons.lang3.StringUtils;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AutomationContext {
+
+    public ResultSet dbResultSet;
     PageObjectMgr pageObjectMgr;
     ScenarioManager scenarioManager;
     ConfigFileReader configFileReader;
     private Map<String, String> contextCache = new HashMap<>();
     private HashMap<String, Map<String, String>> cacheParamMap = new HashMap<>();
     private HashMap<String, Response> responseHashMap = new HashMap<>();
+    private Statement statement;
+
+    public ResultSet getDbResultSet() {
+        return dbResultSet;
+    }
+
+    public void setDbResultSet(ResultSet dbResultSet) {
+        this.dbResultSet = dbResultSet;
+    }
 
     public void setResponseHashMap(String key, Response response) {
         responseHashMap.put(key, response);
@@ -83,4 +96,11 @@ public class AutomationContext {
         return configFileReader;
     }
 
+    public void setStatement(Statement statement) {
+        this.statement = statement;
+    }
+
+    public Statement getStatement() {
+        return statement;
+    }
 }
